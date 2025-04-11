@@ -61,6 +61,7 @@
             android:layout_height="56dp"
             android:background="@drawable/custom_textfield_shape"
             android:hint="Enter your email"
+            android:inputType="textEmailAddress"
             android:textColorHint="@color/onSurfaceContainer"
             android:textColor="@color/onSurfaceContainer"
             android:paddingLeft="10dp"/>
