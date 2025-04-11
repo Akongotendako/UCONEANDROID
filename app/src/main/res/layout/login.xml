@@ -93,7 +93,9 @@
             android:hint="Enter your password"
             android:textColorHint="@color/onSurfaceContainer"
             android:textColor="@color/onSurfaceContainer"
-            android:paddingLeft="10dp"/>
+            android:paddingStart="10dp"
+            android:paddingEnd="12dp"
+            android:drawableEnd="@drawable/visibility"/>
     </LinearLayout>
 
 
@@ -136,6 +138,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/button_custom_shape"

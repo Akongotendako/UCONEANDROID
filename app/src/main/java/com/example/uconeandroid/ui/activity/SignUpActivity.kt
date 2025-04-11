@@ -1,9 +1,14 @@
 package com.example.uconeandroid.ui.activity
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
+import android.view.MotionEvent
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -12,12 +17,14 @@ import com.example.uconeandroid.R
 import com.example.uconeandroid.data.model.UserModel
 import com.example.uconeandroid.data.repository.UserRepository
 import com.example.uconeandroid.utils.isValidGmailAddress
+import com.example.uconeandroid.utils.passwordVisibility
 import com.example.uconeandroid.viewModel.UserViewModel
 import com.example.uconeandroid.viewModel.UserViewModelFactory
 
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var userViewModel: UserViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +34,10 @@ class SignUpActivity : AppCompatActivity() {
         val userFactory = UserViewModelFactory(userRepository)
         userViewModel = ViewModelProvider(this, userFactory)[UserViewModel::class.java]
 
+        navigateBackToSignInScreen()
         validateEmail()
+        passwordVisibility(findViewById(R.id.signUpPassword))
+        passwordVisibility(findViewById(R.id.signUpConfirmPassword))
         signUp()
     }
 
@@ -44,6 +54,8 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
     }
+
+
 
     private fun signUp() {
 
@@ -79,6 +91,14 @@ class SignUpActivity : AppCompatActivity() {
                 )
                 Toast.makeText(this, "Failed ${error}\n$error", Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    private fun navigateBackToSignInScreen() {
+        findViewById<ImageButton>(R.id.loginBackDestination).setOnClickListener {
+            startActivity(
+                Intent(this, LoginActivity::class.java)
+            )
         }
     }
 }

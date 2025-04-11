@@ -12,4 +12,7 @@ interface ApiService {
 
     @POST("users")
     suspend fun signUp(@Body user: UserModel): Response<UserModel>
+
+    @POST("users/sign-in")
+    suspend fun signIn(@Body user: UserModel): Response<UserModel>
 }

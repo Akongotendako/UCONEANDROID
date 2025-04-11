@@ -26,4 +26,15 @@ class UserViewModel(private val userRepository: UserRepository): ViewModel() {
             }
         }
     }
+
+    fun signIn(userModel: UserModel) {
+        viewModelScope.launch {
+            try {
+                val result = userRepository.signIn(userModel)
+                _user.value = result
+            } catch (e: Exception) {
+                Log.e("User", "Error ${e.message}")
+            }
+        }
+    }
 }
