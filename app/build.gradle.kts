@@ -77,4 +77,10 @@ dependencies {
 
     implementation (libs.okhttp)
     implementation (libs.logging.interceptor)
+
+    // card view
+    implementation (libs.cardview.v7)
+
+    // recyleview
+    implementation(libs.androidx.recyclerview)
 }

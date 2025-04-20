@@ -1,50 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:paddingVertical="40dp"
-    android:paddingHorizontal="20dp">
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="40dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:src="@drawable/arrow_back"/>
+            android:src="@drawable/arrow_back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:text="Shop"
             android:textColor="@color/onBackground"
-            android:layout_marginStart="20dp"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="40dp">
-        <ImageView
-            android:id="@+id/imageView"
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/onBackground"
-            android:scaleType="centerCrop"
-            />
+            android:background="@drawable/background"
+            app:cardCornerRadius="12dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:background="@drawable/background"/>
+
+        </android.support.v7.widget.CardView>
 
         <Button
             android:id="@+id/pickImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Choose Image" />
+            android:text="Choose Image"
+            android:background="@drawable/add_button"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/onBackground"/>
     </FrameLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+        <!-- Important: child of ScrollView should be a single layout -->
+        <LinearLayout
+            android:id="@+id/scrollContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- product Name -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/background"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product Name"
+                    android:textColor="@color/onBackground"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/productName"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/custom_textfield_shape"
+                    android:hint="Enter the product name"
+                    android:textColorHint="@color/onSurfaceContainer"
+                    android:textColor="@color/onSurfaceContainer"
+                    android:paddingLeft="10dp"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+
+            <!-- Description -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/background"
+                android:padding="12dp"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price"
+                    android:textColor="@color/onBackground"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/custom_textfield_shape"
+                    android:hint="Enter the price"
+                    android:textColorHint="@color/onSurfaceContainer"
+                    android:textColor="@color/onSurfaceContainer"
+                    android:paddingLeft="10dp"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+
+            <!-- Stock -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/background"
+                android:padding="12dp"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stock"
+                    android:textColor="@color/onBackground"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/stock"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/custom_textfield_shape"
+                    android:hint="Enter the available items"
+                    android:textColorHint="@color/onSurfaceContainer"
+                    android:textColor="@color/onSurfaceContainer"
+                    android:paddingLeft="10dp"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+
+            <!-- Discount -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/background"
+                android:padding="12dp"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Discount"
+                    android:textColor="@color/onBackground"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/discount"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/custom_textfield_shape"
+                    android:hint="Enter the discount"
+                    android:textColorHint="@color/onSurfaceContainer"
+                    android:textColor="@color/onSurfaceContainer"
+                    android:paddingLeft="10dp"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+
+            <!-- Sizes -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/background"
+                android:padding="12dp"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sizes"
+                    android:textColor="@color/onBackground"
+                    android:textSize="20sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleSizes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:orientation="horizontal"
+                    android:scrollbars="none"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -2,6 +2,7 @@
 activityKtx = "1.8.0"
 agp = "8.3.2"
 appcompat = "1.7.0"
+cardviewV7 = "28.0.0"
 converterGson = "2.9.0"
 fragmentKtx = "1.6.1"
 kotlin = "1.9.0"
@@ -14,6 +15,7 @@ activityCompose = "1.7.0"
 composeBom = "2023.08.00"
 loggingInterceptor = "4.12.0"
 okhttp = "4.12.0"
+recyclerview = "1.2.1"
 retrofit = "2.9.0"
 
 [libraries]
@@ -23,6 +25,8 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
+cardview-v7 = { module = "com.android.support:cardview-v7", version.ref = "cardviewV7" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
