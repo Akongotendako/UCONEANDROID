@@ -3,9 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:paddingVertical="40dp"
-    android:paddingHorizontal="20dp"
-    android:background="@color/background">
+    android:paddingHorizontal="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,32 +28,23 @@
             android:textSize="18sp"/>
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
+        android:layout_height="200dp"
         android:layout_marginTop="40dp">
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:background="@drawable/custom_textfield_shape"
-            android:drawableStart="@drawable/search"
-            android:drawableEnd="@drawable/filter"
-            android:paddingHorizontal="20dp"
-            android:hint="Search anything..."
-            android:textColorHint="@color/onSurfaceContainer"
-            android:drawablePadding="10dp"/>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/onBackground"
+            android:scaleType="centerCrop"
+            />
 
         <Button
-            android:id="@+id/adminShopAddItem"
-            android:layout_width="50dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/add_button"
-            android:text="+"
-            android:textColor="@color/onPrimary"/>
-    </LinearLayout>
+            android:id="@+id/pickImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Choose Image" />
+    </FrameLayout>
 </LinearLayout>

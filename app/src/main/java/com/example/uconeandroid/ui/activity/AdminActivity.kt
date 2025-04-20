@@ -1,13 +1,14 @@
 package com.example.uconeandroid.ui.activity
 
 import android.os.Bundle
-import android.widget.ImageView
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.uconeandroid.R
 import com.example.uconeandroid.ui.fragment.admin.AccountFragment
 import com.example.uconeandroid.ui.fragment.admin.HomeFragment
-import com.example.uconeandroid.ui.fragment.admin.ShopFragment
+import com.example.uconeandroid.ui.fragment.admin.AdminShopFragment
 import com.example.uconeandroid.ui.fragment.admin.StudentFragment
 
 class AdminActivity : AppCompatActivity() {
@@ -25,17 +26,18 @@ class AdminActivity : AppCompatActivity() {
             findViewById(R.id.adminNavHome),
             findViewById(R.id.adminNavShop),
             findViewById(R.id.adminNavStudent),
-            findViewById<ImageView>(R.id.adminNavAccount),
+            findViewById<ImageButton>(R.id.adminNavAccount),
         )
 
         navItems.forEach { item ->
             item.setOnClickListener {
                 when(item.id) {
                     R.id.adminNavHome -> initializeFragment(HomeFragment())
-                    R.id.adminNavShop -> initializeFragment(ShopFragment())
+                    R.id.adminNavShop -> initializeFragment(AdminShopFragment())
                     R.id.adminNavStudent -> initializeFragment(StudentFragment())
                     R.id.adminNavAccount-> initializeFragment(AccountFragment())
                 }
+                updateNavigation(item.id)
             }
         }
     }
@@ -56,8 +58,13 @@ class AdminActivity : AppCompatActivity() {
             R.id.adminNavStudent,
             R.id.adminNavAccount
         ).forEach {
-            val item = findViewById<ImageView>(it)
+            val item = findViewById<ImageButton>(it)
             val isSelected = it == selectedItem
+
+            item.setColorFilter(
+                ContextCompat.getColor(this,
+                    if (isSelected) R.color.surfaceVariant else R.color.onSurfaceContainer)
+            )
         }
     }
 }

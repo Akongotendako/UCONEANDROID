@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
 
     <FrameLayout
@@ -16,27 +17,51 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="#243647">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/adminNavHome"
-            android:layout_width="24dp"
-            android:layout_height="24dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/home"/>
 
-        <ImageView
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <ImageButton
             android:id="@+id/adminNavShop"
-            android:layout_width="24dp"
-            android:layout_height="24dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/shop"/>
 
-        <ImageView
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <ImageButton
             android:id="@+id/adminNavStudent"
-            android:layout_width="24dp"
-            android:layout_height="24dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/student"/>
 
-        <ImageView
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <ImageButton
             android:id="@+id/adminNavAccount"
-            android:layout_width="24dp"
-            android:layout_height="24dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/account"/>
     </LinearLayout>
 
 </LinearLayout>
