@@ -46,6 +46,7 @@ class SizeAdapter(
 
         holder.itemView.post{
             notifyItemChanged(position)
+            onSizeSelected(position)
         }
     }
 

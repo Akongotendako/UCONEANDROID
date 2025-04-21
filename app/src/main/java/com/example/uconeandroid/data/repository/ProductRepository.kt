@@ -10,34 +10,8 @@ import retrofit2.Response
 
 class ProductRepository {
 
-    suspend fun addProduct(
-        productName: String,
-        description: String,
-        price: String,
-        stock: String,
-        discount: String,
-        image: MultipartBody.Part,
-        sizes: List<String>,
-        category: String
-    ): Response<ProductModel> {
+    private val apiService = RetrofitInstance.api
 
-        val productNameBody = productName.toRequestBody("text/plain".toMediaTypeOrNull())
-        val descriptionBody = description.toRequestBody("text/plain".toMediaTypeOrNull())
-        val priceBody = price.toRequestBody("text/plain".toMediaTypeOrNull())
-        val stockBody = stock.toRequestBody("text/plain".toMediaTypeOrNull())
-        val discountBody = discount.toRequestBody("text/plain".toMediaTypeOrNull())
-        val sizesBody = sizes.joinToString(",").toRequestBody("text/plain".toMediaTypeOrNull())
-        val categoryBody = category.toRequestBody("text/plain".toMediaTypeOrNull())
-
-        return RetrofitInstance.api.addProduct(
-            productNameBody,
-            descriptionBody,
-            priceBody,
-            stockBody,
-            discountBody,
-            image,
-            sizesBody,
-            categoryBody
-        )
-    }
+    suspend fun uploadProductImage(image: MultipartBody.Part) = apiService.uploadProductImage(image)
+    suspend fun addProduct(productModel: ProductModel) = apiService.addProduct(productModel)
 }
