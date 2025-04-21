@@ -50,5 +50,9 @@ class SizeAdapter(
         }
     }
 
+    fun clearSelections() {
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int = sizes.size
 }

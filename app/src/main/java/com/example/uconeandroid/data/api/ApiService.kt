@@ -2,6 +2,7 @@ package com.example.uconeandroid.data.api
 
 import com.example.uconeandroid.data.model.ProductModel
 import com.example.uconeandroid.data.model.UserModel
+import com.example.uconeandroid.data.response.ApiResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -22,11 +23,14 @@ interface ApiService {
     @POST("products")
     suspend fun addProduct(
         @Body productModel: ProductModel
-    ): Response<ProductModel>
+    ): Response<ApiResponse<ProductModel>>
 
     @Multipart
     @POST("products/upload")
     suspend fun uploadProductImage(
         @Part image: MultipartBody.Part
-    ): Response<String>
+    ): Response<ApiResponse<String>>
+
+    @GET("products")
+    suspend fun fetchProducts(): Response<ApiResponse<List<ProductModel>>>
 }

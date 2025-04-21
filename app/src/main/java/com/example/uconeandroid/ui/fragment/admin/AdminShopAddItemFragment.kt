@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.uconeandroid.R
 import com.example.uconeandroid.data.model.ProductModel
 import com.example.uconeandroid.databinding.FragmentAdminShopAddItemBinding
 import com.example.uconeandroid.ui.adapter.CategoryAdapter
@@ -22,7 +23,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
-class AdminShopAddItemFragment: Fragment() {
+class AdminShopAddItemFragment : Fragment() {
 
     private var _binding: FragmentAdminShopAddItemBinding? = null
     private val binding get() = _binding!!
@@ -33,13 +34,14 @@ class AdminShopAddItemFragment: Fragment() {
     private var selectedSizes: MutableList<String> = mutableListOf()
     private var selectedCategory: String = "Lanyard"
 
-    private val imagePickerLauncher = registerForActivityResult(ActivityResultContracts.GetContent()){uri: Uri? ->
-        uri?.let {
-            selectedImageUri = it
-            binding.imageView.setImageURI(it)
-            binding.pickImageButton.visibility = View.GONE
+    private val imagePickerLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let {
+                selectedImageUri = it
+                binding.imageView.setImageURI(it)
+                binding.pickImageButton.visibility = View.GONE
+            }
         }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,18 +58,19 @@ class AdminShopAddItemFragment: Fragment() {
         initializeSizes()
         initializeCategory()
         addProduct()
-
+        navigateBackToShop()
     }
 
     private fun initializeSizes() {
         val sizes = listOf("Small", "Medium", "Large", "Extra Large")
-        sizeAdapter = SizeAdapter(sizes){
+        sizeAdapter = SizeAdapter(sizes) {
             val isSelectedSize = selectedSizes.contains(sizes[it])
             if (isSelectedSize) selectedSizes.remove(sizes[it]) else selectedSizes.add(sizes[it])
 
         }
 
-        binding.recycleSizes.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recycleSizes.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.recycleSizes.adapter = sizeAdapter
     }
 
@@ -77,7 +80,8 @@ class AdminShopAddItemFragment: Fragment() {
             Log.e("Category", categories[it])
             selectedCategory = categories[it]
         }
-        binding.recycleCategory.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recycleCategory.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.recycleCategory.adapter = categoryAdapter
     }
 
@@ -90,13 +94,15 @@ class AdminShopAddItemFragment: Fragment() {
 
     private fun addProduct() {
         binding.addProduct.setOnClickListener {
-            uploadImageFromUri(selectedImageUri!!)
+
             val productName = binding.productName.text.toString()
             val price = binding.price.text.toString()
             val stock = binding.stock.text.toString()
             val discount = binding.discount.text.toString()
             val description = binding.description.text.toString()
             val progressBar = binding.progressBar
+
+            Log.e("Sizes", selectedSizes.size.toString())
 
             val product = ProductModel(
                 productName = productName,
@@ -108,35 +114,75 @@ class AdminShopAddItemFragment: Fragment() {
                 discount = discount
             )
 
-            viewModel.uploadProductImage.observe(viewLifecycleOwner) {imageUrl ->
-
-                Log.e("imageUpload", imageUrl)
-                val finalProduct = product.copy(
-                    imageUrl = imageUrl
-                )
-
-                viewModel.addProduct(finalProduct)
-            }
-
-            viewModel.product.observe(viewLifecycleOwner) {
-                when(it) {
+            viewModel.uploadProductImage.observe(viewLifecycleOwner) { result ->
+                when (result) {
                     is ResultState.Error -> {
-                        requireContext().showDialog(success = false)
                         progressBar.visibility = View.GONE
+                        requireContext().showDialog(success = false)
                     }
+
                     ResultState.Loading -> {
                         progressBar.visibility = View.VISIBLE
                     }
+
                     is ResultState.Success -> {
-                        requireContext().showDialog(success = true)
                         progressBar.visibility = View.GONE
+                        val imageUrl = result.data
+                        val finalProduct = product.copy(
+                            imageUrl = imageUrl
+                        )
+
+                        viewModel.addProduct(finalProduct)
                     }
                 }
             }
 
+            viewModel.product.observe(viewLifecycleOwner) {
+                when (it) {
+                    is ResultState.Error -> {
+                        requireContext().showDialog(success = false)
+                        progressBar.visibility = View.GONE
+                    }
 
+                    ResultState.Loading -> {
+                        progressBar.visibility = View.VISIBLE
+                    }
+
+                    is ResultState.Success -> {
+                        progressBar.visibility = View.GONE
+                        requireContext().showDialog(success = true)
+                        viewModel.reset()
+                        reset()
+                    }
+                }
+            }
+
+            binding.progressBar.visibility = View.VISIBLE
+
+            if (selectedImageUri != null) {
+                uploadImageFromUri(selectedImageUri!!)
+            }
         }
 
+    }
+
+
+    private fun reset() {
+
+        binding.productName.setText("")
+        binding.price.setText("")
+        binding.stock.setText("")
+        binding.discount.setText("")
+        binding.description.setText("")
+        binding.progressBar.visibility = View.GONE
+        binding.imageView.setImageDrawable(null)
+        binding.pickImageButton.visibility = View.VISIBLE
+
+        selectedCategory = "Lanyard"
+        selectedSizes.clear()
+        sizeAdapter.clearSelections()
+
+        selectedImageUri = null
     }
 
     private fun uploadImageFromUri(uri: Uri) {
@@ -152,6 +198,15 @@ class AdminShopAddItemFragment: Fragment() {
             .asRequestBody("image/*".toMediaTypeOrNull())
         val body = MultipartBody.Part.createFormData("image", tempFile.name, requestBody)
         viewModel.uploadProductImage(body)
+    }
+
+    private fun navigateBackToShop() {
+        binding.addItemBackIconButton.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, AdminShopFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     override fun onDestroyView() {
