@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("org.jetbrains.kotlin.plugin.parcelize")
 }
 
 android {
@@ -81,6 +82,9 @@ dependencies {
     // card view
     implementation (libs.cardview.v7)
 
-    // recyleview
+    // recycle view
     implementation(libs.androidx.recyclerview)
+
+    //glide
+    implementation(libs.glide)
 }

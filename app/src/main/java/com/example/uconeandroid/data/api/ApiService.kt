@@ -10,6 +10,7 @@ import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Query
 
 interface ApiService {
     @GET("users")
@@ -33,4 +34,9 @@ interface ApiService {
 
     @GET("products")
     suspend fun fetchProducts(): Response<ApiResponse<List<ProductModel>>>
+
+    @GET("products/category")
+    suspend fun fetchProductByCategory(
+        @Query("category") category: String
+    ): Response<ApiResponse<List<ProductModel>>>
 }

@@ -2,8 +2,8 @@ package com.example.uconeandroid.ui.fragment.admin
 
 
 import android.graphics.Rect
-import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,6 +51,7 @@ class AdminShopFragment : Fragment() {
         val categories = listOf("All", "Lanyard", "Uniform", "T-Shirt")
         categoryAdapter = CategoryAdapter(categories) {
             selectedCategory = categories[it]
+            viewmodel.fetchProductByCategory(selectedCategory)
         }
         binding.shopCategoryMenu.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -58,32 +59,35 @@ class AdminShopFragment : Fragment() {
     }
 
     private fun initializeCategoryGrid() {
+
+        categoryGridAdapter = CategoryGridAdapter(emptyList()) { result ->
+
+        }
+        binding.shopCategoryList.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.shopCategoryList.adapter = categoryGridAdapter
+
+        val spacing = resources.getDimensionPixelSize(R.dimen.grid_spacing)
+        binding.shopCategoryList.addItemDecoration(object :
+            RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(
+                outRect: Rect,
+                view: View,
+                parent: RecyclerView,
+                state: RecyclerView.State
+            ) {
+                outRect.set(spacing, spacing, spacing, spacing)
+            }
+        })
+
         viewmodel.products.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ResultState.Error -> {}
                 ResultState.Loading -> {}
                 is ResultState.Success -> {
-                    categoryGridAdapter = CategoryGridAdapter(result.data)
-                    binding.shopCategoryList.layoutManager = GridLayoutManager(requireContext(), 2)
-                    binding.shopCategoryList.adapter = categoryGridAdapter
-
-                    val spacing = resources.getDimensionPixelSize(R.dimen.grid_spacing)
-                    binding.shopCategoryList.addItemDecoration(object :
-                        RecyclerView.ItemDecoration() {
-                        override fun getItemOffsets(
-                            outRect: Rect,
-                            view: View,
-                            parent: RecyclerView,
-                            state: RecyclerView.State
-                        ) {
-                            outRect.set(spacing, spacing, spacing, spacing)
-                        }
-                    })
+                    categoryGridAdapter.updateList(result.data)
                 }
             }
         }
-
-
     }
 
     private fun navigateToAddItemScreen(view: View) {
@@ -94,5 +98,6 @@ class AdminShopFragment : Fragment() {
                 .commit()
         }
     }
+
 
 }

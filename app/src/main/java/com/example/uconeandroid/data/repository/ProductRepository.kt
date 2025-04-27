@@ -24,4 +24,8 @@ class ProductRepository {
     suspend fun fetchProducts(): Response<ApiResponse<List<ProductModel>>> {
         return apiService.fetchProducts()
     }
+
+    suspend fun fetchProductByCategory(category: String): Response<ApiResponse<List<ProductModel>>> {
+        return apiService.fetchProductByCategory(category)
+    }
 }

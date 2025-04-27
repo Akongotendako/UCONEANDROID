@@ -34,6 +34,7 @@ class ProductViewModel : ViewModel() {
                 val body = response.body()
                 if (response.isSuccessful && body != null && body.success) {
                     _products.value = ResultState.Success(body.data!!)
+                    Log.e("Response", response.body()!!.toString())
                 } else {
                     _products.value = ResultState.Error(response.errorBody()?.string()!!)
                 }
@@ -76,6 +77,24 @@ class ProductViewModel : ViewModel() {
                 }
             } catch (e: Exception) {
                 _product.value = ResultState.Error(e.message!!)
+            }
+        }
+    }
+
+    fun fetchProductByCategory(category: String) {
+        viewModelScope.launch {
+            try {
+                val response = productRepository.fetchProductByCategory(category)
+                val body = response.body()
+
+                Log.e("FetchByCateg", response.body().toString())
+
+                if (response.isSuccessful && body != null && body.success)
+                    _products.value = ResultState.Success(body.data!!)
+                else
+                    _products.value = ResultState.Error(response.errorBody()?.string()!!)
+            }catch (e: Exception) {
+                _products.value = ResultState.Error(e.message!!)
             }
         }
     }

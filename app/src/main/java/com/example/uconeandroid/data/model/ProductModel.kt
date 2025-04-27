@@ -1,8 +1,9 @@
 package com.example.uconeandroid.data.model
 
-import android.net.Uri
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class ProductModel(
     val id: String? = null,
     val productName: String,
@@ -13,4 +14,4 @@ data class ProductModel(
     val imageUrl: String? = null,
     val sizes: List<String> = listOf(),
     val category: String
-)
+) : Parcelable
