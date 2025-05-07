@@ -20,6 +20,13 @@
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.UCONEANDROID">
+
+        </activity>
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.UCONEANDROID">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,6 +40,14 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.UCONEANDROID">
         </activity>
+        <activity
+            android:name=".ui.activity.StudentActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.UCONEANDROID">
+
+        </activity>
+
     </application>
 
 </manifest>

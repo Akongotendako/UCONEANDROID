@@ -1,4 +1,4 @@
-package com.example.uconeandroid.ui.fragment.admin
+package com.example.uconeandroid.ui.fragment.student
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.uconeandroid.R
 import com.example.uconeandroid.databinding.FragmentStudentProfileBinding
 
-class StudentFragment: Fragment() {
-
+class StudentProfileFragment : Fragment() {
     private var _binding : FragmentStudentProfileBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(

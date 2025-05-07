@@ -16,4 +16,5 @@
     <color name="surfaceContainer">#243647</color>
     <color name="onSurfaceContainer">#50FFFFFF</color>
     <color name="surfaceVariant">#94ADC7</color>
+    <color name="light">#FFF7EC</color>
 </resources>

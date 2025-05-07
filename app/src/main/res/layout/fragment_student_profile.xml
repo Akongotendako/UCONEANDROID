@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#121829">
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,8 +37,7 @@
                     android:layout_marginBottom="12dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/avatar"
-                    android:contentDescription="Profile picture"
-                    tools:src="@drawable/avatar" />
+                    android:contentDescription="Profile picture" />
 
                 <TextView
                     android:id="@+id/profileName"
@@ -175,55 +174,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:orientation="horizontal"
-        android:background="#1E2736"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="16dp">
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/home"
-            android:contentDescription="Home" />
-
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/shop"
-            android:contentDescription="Shop" />
-
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/cart"
-            android:contentDescription="Cart" />
-
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Orders"
-            android:src="@drawable/orders" />
-
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/account"
-            android:contentDescription="Account" />
-
-    </LinearLayout>
 
 </LinearLayout>
